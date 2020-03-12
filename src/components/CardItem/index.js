@@ -22,10 +22,10 @@ export default function CardItem({item: {id, title, selected}, onSelect}) {
       return (
         <TouchableOpacity 
             onPress={() => onSelect(id)} 
-            style={[styles.container, {backgroundColor: selected ? '#ffcccb' : '#0080FF'}]}
+            style={[styles.container, {backgroundColor: selected ? '#fff' : '#0080FF'}]}
         >
             <Text style={[styles.contentStyle, {color: selected ? '#000' : '#fff'}]}>
-                {title}
+                { selected ? title : '?' }
             </Text>
         </TouchableOpacity>
       );
