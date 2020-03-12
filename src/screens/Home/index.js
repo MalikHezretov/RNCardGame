@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import CardItem from '../../components/CardItem';
 import { FlatList, SafeAreaView, StyleSheet, View, Modal } from 'react-native';
 import DATA from './mockData';
 
   export default function Home() {
+
+    const [ data, setData ] = useState(DATA);
+    
+    const onSelect = useRef(id => {
+      setData(oldData => {
+        return [
+          ...oldData.map(item => {
+            if (id === item.id) {
+              return {
+                ...item,
+                selected: !item.selected,
+              };
+            }
+            return item;
+          }),
+        ];
+      });
+    });
+
     return (
       <View>
         <Modal           
@@ -12,10 +31,10 @@ import DATA from './mockData';
           visible={true}>
         <SafeAreaView style={styles.container}>
         <FlatList
-          data={DATA}
+          data={data}
           renderItem={({ item }) => 
               <View style={styles.itemStyle}>
-                  <CardItem selected={false} name={item.title} />
+                  <CardItem item={item} onSelect={onSelect.current} />
               </View>
           }
           keyExtractor={item => item.id}

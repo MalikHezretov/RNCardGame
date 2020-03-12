@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -16,10 +16,18 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CardItem = (props) => {
-    return(
-        <TouchableOpacity onPress={props.onSelectCard} style={[styles.container, {backgroundColor: props.selected ? '#ffcccb' : '#0080FF'}]}>
-            <Text style={[styles.contentStyle, {color: props.selected ? '#000' : '#fff'}]}> {props.selected ? props.name : '?'}</Text>
+export default function CardItem({item: {id, title, selected}, onSelect}) {
+    return useMemo(() => {
+      console.log('item is rendering ===', id);
+      return (
+        <TouchableOpacity 
+            onPress={() => onSelect(id)} 
+            style={[styles.container, {backgroundColor: selected ? '#ffcccb' : '#0080FF'}]}
+        >
+            <Text style={[styles.contentStyle, {color: selected ? '#000' : '#fff'}]}>
+                {title}
+            </Text>
         </TouchableOpacity>
-    )
-}
+      );
+    }, [selected]);
+  }
