@@ -3,22 +3,23 @@ import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-        height: 100,
+        height: 150,
         width: 100,
         borderRadius: 10,
         borderWidth: 2,
-        borderColor: '#000'
+        borderColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     contentStyle: {
-        fontSize: 14,
-        textAlign: 'center'
+        fontSize: 30,
     }
 });
 
 export default CardItem = (props) => {
     return(
-        <TouchableOpacity onPress={props.onSelectCard} style={styles.container, {backgroundColor: props.selected ? '#fff' : '#addde6'}}>
-            <Text style={styles.contentStyle, {color: props.selected ? '#000' : '#fff',}}>{props.name}</Text>
+        <TouchableOpacity onPress={props.onSelectCard} style={[styles.container, {backgroundColor: props.selected ? '#ffcccb' : '#0080FF'}]}>
+            <Text style={[styles.contentStyle, {color: props.selected ? '#000' : '#fff'}]}> {props.selected ? props.name : '?'}</Text>
         </TouchableOpacity>
     )
 }
